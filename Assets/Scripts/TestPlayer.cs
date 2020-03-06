@@ -8,9 +8,11 @@ public class TestPlayer : MonoBehaviour
 
     public float speed = 5.0f;
 
+    LineRenderer lineRenderer;
+
     void Start()
     {
-        
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     void FixedUpdate()
@@ -33,13 +35,15 @@ public class TestPlayer : MonoBehaviour
 
         if (hit)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 Destroy(hit.transform.gameObject);
                 Debug.Log("발사");
             }
 
-            Debug.DrawRay(head.position, head.up * Vector2.Distance(head.up, hit.transform.position));
+            float distance = Vector2.Distance(head.up, hit.transform.position);
+
+            Debug.DrawRay(head.position, head.up * distance);
         }
         else
         {
